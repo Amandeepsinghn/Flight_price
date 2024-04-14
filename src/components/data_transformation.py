@@ -33,7 +33,8 @@ class Data_Transformation:
             categircal_pipeline=Pipeline(
                 steps=[
                     ('imputer',SimpleImputer(strategy='most_frequent')),
-                    ('one hot encoding',OneHotEncoder())
+                    ('one_hot_encoding',OneHotEncoder())
+                    
                 ]
             )
             
@@ -62,6 +63,7 @@ class Data_Transformation:
     
     def intiate_data_transformation(self,train_path,test_path):
         try:
+            cat_feat=['Airline','Source','Destination']
             logging.info('intitating the data_transfromation')
             
             target_cols=['Price']
