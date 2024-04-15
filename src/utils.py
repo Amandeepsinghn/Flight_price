@@ -4,6 +4,7 @@ from src.exception import Custom_Exception
 import sys
 import os
 from sklearn.metrics import r2_score
+from sklearn.model_selection import RandomizedSearchCV
 
 
 def save_object(file_path,obj):
@@ -31,13 +32,19 @@ def load_object(file_path):
     
     
     
-def evaluate_model(X_train,y_train,X_test,y_test,models):
+def evaluate_model(X_train,y_train,X_test,y_test,models,params):
     try:
         report={}
         logging.info('predicting the model accuracy')
         for i in range(len(models)):
-            model=list(models.values())[i]     #giving the model name 
+            model=list(models.values())[i] #giving the model name 
+            para=params[list(models.keys())[i]]
             
+            rs=RandomizedSearchCV(model,para,cv=5,n_jobs=-1,verbose=1)
+            rs.fit(X_train,y_train)
+            
+            
+            model.set_params(**rs.best_params_)
             model.fit(X_train,y_train)
             # string the prediction of model accuracy in test and training dataset 
             y_test_pred=model.predict(X_test)
