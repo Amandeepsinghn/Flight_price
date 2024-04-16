@@ -23,10 +23,9 @@ def save_object(file_path,obj):
     
 def load_object(file_path):
     try:
-        logging.info('loading the model')
-        with open(file_path,'rb') as obj:
-            dill.load(obj)
-            
+        with open(file_path,"rb") as file_obj:
+            return dill.load(file_obj)
+        
     except Exception as e:
         raise Custom_Exception(e,sys)
     

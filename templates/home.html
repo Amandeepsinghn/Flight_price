@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        select,
+        input[type="number"],
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result h2 {
+            color: #333;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Price Prediction</h1>
+        <p>Enter your flight details below:</p>
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+            <label for="Airline">Airline:</label>
+            <select id="Airline" name="Airline" required>
+                <option value="">Select Airline</option>
+                <option value="IndiGo">IndiGo</option>
+                <option value="Air India">Air India</option>
+                <option value="Jet Airways">Jet Airways</option>
+                <option value="SpiceJet">SpiceJet</option>
+                <option value="Multiple carriers">Multiple carriers</option>
+                <option value="GoAir">GoAir</option>
+                <option value="Vistara">Vistara</option>
+                <option value="Air Asia">Air Asia</option>
+                <option value="Vistara Premium economy">Vistara Premium economy</option>
+                <option value="Jet Airways Business">Jet Airways Business</option>
+                <option value="Multiple carriers Premium economy">Multiple carriers Premium economy</option>
+                <option value="Trujet">Trujet</option>
+            </select><br>
+            <label for="Source">Source:</label>
+            <select id="Source" name="Source" required>
+                <option value="">Select Source</option>
+                <option value="Banglore">Banglore</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Mumbai">Mumbai</option>
+            </select><br>
+            <label for="Destination">Destination:</label>
+            <select id="Destination" name="Destination" required>
+                <option value="">Select Destination</option>
+                <option value="New Delhi">New Delhi</option>
+                <option value="Banglore">Banglore</option>
+                <option value="Cochin">Cochin</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Hyderabad">Hyderabad</option>
+            </select><br>
+            <label for="Total_stops">Total Stops:</label>
+            <input type="number" id="Total_stops" name="Total_stops" required><br>
+            <label for="Journey_day">Journey Day:</label>
+            <input type="number" id="Journey_day" name="Journey_day" placeholder="Enter day (e.g., 1 for 1st)" required><br>
+            <label for="Journey_month">Journey Month:</label>
+            <input type="text" id="Journey_month" name="Journey_month" required><br>
+            <label for="Dep_hour">Departure Hour:</label>
+            <input type="number" id="Dep_hour" name="Dep_hour" required><br>
+            <label for="Dep_minute">Departure Minute:</label>
+            <input type="number" id="Dep_minute" name="Dep_minute" required><br>
+            <label for="Arv_hour">Arrival Hour:</label>
+            <input type="number" id="Arv_hour" name="Arv_hour" required><br>
+            <label for="Arv_minute">Arrival Minute:</label>
+            <input type="number" id="Arv_minute" name="Arv_minute" required><br>
+            <label for="Total_duration">Total Duration:</label>
+            <input type="text" id="Total_duration" name="Total_duration" required><br>
+            <label for="Route_count">Route Count:</label>
+            <input type="number" id="Route_count" name="Route_count" required><br>
+            <button type="submit">Predict Price</button>
+        </form>
+        <div class="result" id="result">
+            {% if results %}
+                <h2>The prediction is {{ results }}</h2>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

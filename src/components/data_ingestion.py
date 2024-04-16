@@ -59,7 +59,6 @@ class Data_ingestion:
             raise Custom_Exception(e,sys)
         
         
-        
 if __name__=="__main__":
     a=Data_ingestion()
     train,test=a.initiate_data_ingestion()
@@ -68,7 +67,8 @@ if __name__=="__main__":
     h,j,c=b.intiate_data_transformation(train,test)
     
     z=Model_trainer()
-    print(z.initaite_model_trainer(h,j))
+    print(z.initaite_model_trainer(h,j))     
+
     
     
     
