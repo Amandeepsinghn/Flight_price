@@ -1,10 +1,10 @@
 pandas 
-numpy 
 seaborn 
 scikit-learn
-openpyxl
 dill
 lightgbm
 xgboost
 Flask
-#-e .
+matplotlib
+numpy 
+#e . 
